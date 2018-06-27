@@ -1,34 +1,38 @@
 
 import axios from "axios";
 import { NotificationManager } from 'react-notifications';
-export function fetchUsers(){
+import { baseUrl } from '../config';
+
+export function fetchCars(){
   return function (dispatch) {
-    axios.get(baseUrl+"api/v1/users")
+    axios.get(baseUrl+"api/v1/cars")
     .then((response) => {
-      dispatch({type: "FETCH_USERS_FULFILLED", payload: response.data});
+      dispatch({type: "FETCH_CARS_FULFILLED", payload: response.data});
     })
     .catch((error) => {
-      dispatch({type: "FETCH_USERS_REJECTED", payload: error});
+      dispatch({type: "FETCH_CARS_REJECTED", payload: error});
     })
   }
 }
-export function fetchUser(id){
+
+export function fetchCar(id){
   return function (dispatch) {
-    axios.get(baseUrl+"api/v1/users/"+id)
+    axios.get(baseUrl+"api/v1/cars/"+id)
     .then((response) => {
-      dispatch({type: "FETCH_USER_FULFILLED", payload: response.data.user});
+      dispatch({type: "FETCH_CAR_FULFILLED", payload: response.data.car});
     })
     .catch((error) => {
-      dispatch({type: "FETCH_USER_REJECTED", payload: error});
+      dispatch({type: "FETCH_CAR_REJECTED", payload: error});
     })
   }
 }
-export function deleteUser(formData){
+
+export function deleteCar(formData){
   return function (dispatch) {
-    axios.post(baseUrl+"api/v1/users/delete", formData)
+    axios.post(baseUrl+"api/v1/cars/delete", formData)
     .then((response) => {
       NotificationManager.success(response.data.message, 'Success', 5000);
-      dispatch(fetchUsers());
+      dispatch(fetchcars());
     })
     .catch((error) => {
       NotificationManager.error("An error occured in the operation", 'Error', 5000);

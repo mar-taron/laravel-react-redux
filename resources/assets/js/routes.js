@@ -8,8 +8,8 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import Layout from './layoutComponents/Layout';
 import Home from './pageComponents/Home';
 import Cars from './pageComponents/Cars';
-import NewCar from "./pageComponents/NewCar";
-import EditCar from "./pageComponents/EditCar";
+// import NewCar from "./pageComponents/NewCar";
+// import EditCar from "./pageComponents/EditCar";
 
 
 //auth pages
@@ -25,9 +25,8 @@ const Routes = () => {
 		<Router history={routerHistory}>
 			<Layout>
 				<Route exact path="/" component={Home}/>
-				<Route path="/cars" component={requireAuth(Cars)} />
-		        <Route path = "cars/new" component = { requireAuth(NewCar) }></Route>
-		        <Route path = "cars/:id/edit" component = { requireAuth(EditCar) }>
+				<Route path="/Cars" component={requireAuth(Cars)} />
+		      
 			</Layout>
 		</Router>
 	)
