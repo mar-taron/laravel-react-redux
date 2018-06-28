@@ -1,7 +1,7 @@
 
 import React, {Component}  from 'react'
 import CSSModules from 'react-css-modules'
-import styles from './styles/Home.scss'
+import styles from './styles/Table.scss'
 import { connect } from "react-redux";
 import { baseUrl } from '../config';
 // import { Link } from "react-router";
@@ -14,7 +14,6 @@ class Cars extends React.Component{
   }
 
   componentWillMount(){
-    console.log(baseUrl);
     this.props.dispatch(fetchCars());
   }
  
@@ -32,39 +31,25 @@ class Cars extends React.Component{
   render(){
     return(
         <div>
-        <h1 className="pull-left">cars</h1>
-        <div className="col-lg-12">
-			  <table className="table table-responsive">
-			  <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Contact Address</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-                {/* this.props.cars.map((car, index) => {
-                    return (
-                      <tr key={index+1}>
-                        <td>{car.fullname}</td>
-                        <td>{car.email}</td>
-                        <td>{car.phone_number}</td>
-                        <td>{car.contact_address}</td>
-                        <td>
-<Link to={'cars/'+car.car_id+'/edit'} className="btn btn-success btn-xs pull-left"><i className="glyphicon glyphicon-pencil"></i></Link>
-<form id={"form_"+car.car_id} className="pull-left" method="post">
-                  <input type="hidden" name="car_id" value={car.car_id} />
-                  <a className="btn btn-danger btn-xs" onClick={(event) => this.handleBtnDelete(car.car_id, event)} href="#" id={car.car_id}><i className="glyphicon glyphicon-trash"></i></a>
-                </form>
-              </td>
+        <table>
+          <caption>Cars</caption>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Image</th>
+              <th scope="col">Vehicle</th>
+              <th scope="col">Model</th>
             </tr>
-          )
-        }) */}
-        </tbody>
-			</table>
-			</div>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Name">Visa - 3412</td>
+              <td data-label="Image">04/01/2016</td>
+              <td data-label="Vehicle">$1,190</td>
+              <td data-label="Model">03/01/2016 - 03/31/2016</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       );
     }

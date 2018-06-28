@@ -35,6 +35,9 @@ $api->version('v1', function (Router $api) {
     $api->post('logout', 'App\Http\Controllers\AuthenticateController@logout');
     $api->get('token', 'App\Http\Controllers\AuthenticateController@getToken');
 
+    // CRUD
+    $api->resource('cars', 'App\Http\Controllers\API\CarsController') ;
+
 
     //protected route group
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
@@ -58,5 +61,7 @@ $api->version('v1', function (Router $api) {
                 ]);
             }
         ]);
+
+
     });
 });

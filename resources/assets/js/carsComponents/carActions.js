@@ -5,8 +5,9 @@ import { baseUrl } from '../config';
 
 export function fetchCars(){
   return function (dispatch) {
-    axios.get(baseUrl+"api/v1/cars")
+    axios.get(baseUrl+"api/cars")
     .then((response) => {
+      console.log(response);
       dispatch({type: "FETCH_CARS_FULFILLED", payload: response.data});
     })
     .catch((error) => {
@@ -17,7 +18,7 @@ export function fetchCars(){
 
 export function fetchCar(id){
   return function (dispatch) {
-    axios.get(baseUrl+"api/v1/cars/"+id)
+    axios.get(baseUrl+"api/cars/"+id)
     .then((response) => {
       dispatch({type: "FETCH_CAR_FULFILLED", payload: response.data.car});
     })
@@ -29,7 +30,7 @@ export function fetchCar(id){
 
 export function deleteCar(formData){
   return function (dispatch) {
-    axios.post(baseUrl+"api/v1/cars/delete", formData)
+    axios.post(baseUrl+"api/cars/delete", formData)
     .then((response) => {
       NotificationManager.success(response.data.message, 'Success', 5000);
       dispatch(fetchcars());
