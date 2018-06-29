@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\DB;
 
 use App\Car;
 use Validator ;
@@ -10,8 +11,13 @@ class CarsController extends BaseController
 {
     // get Cars
     public function index()
-    { 
-        $cars = Car::all();
+    { //DB::enableQueryLog();
+        $cars = DB::table('cars')
+            ->leftJoin('vehicles', 'vehicles.id', '=', 'cars.vehicle_id')
+            ->leftJoin('models', 'models.id', '=', 'cars.model_id')
+            ->select('cars.*', 'vehicles.name as vehicle', 'models.name as model')
+            ->get();
+        // var_dump(DB::getQueryLog());die;    
         return $this->sendResponse($cars->toArray(), 'Cars read succesfully');
     }
 
@@ -62,8 +68,9 @@ class CarsController extends BaseController
 
     // delete Car 
     public function destroy(Car $car)
-    { 
-        $car->delete();
+    {
+        // $car->delete();
+        echo "<pre>";  var_dump($car->delete());die;
         return $this->sendResponse($car->toArray(), 'Car deleted succesfully');
     }
     

@@ -7,8 +7,7 @@ export function fetchCars(){
   return function (dispatch) {
     axios.get(baseUrl+"api/cars")
     .then((response) => {
-      console.log(response);
-      dispatch({type: "FETCH_CARS_FULFILLED", payload: response.data});
+      dispatch({type: "FETCH_CARS_FULFILLED", payload: response.data.data});
     })
     .catch((error) => {
       dispatch({type: "FETCH_CARS_REJECTED", payload: error});

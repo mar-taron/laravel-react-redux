@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Tymon\JWTauth;
 use Dingo\Api\Routing\Router;
 
+header('Access-Control-Allow-Credentials: true');
 
 
 /*
@@ -35,13 +36,15 @@ $api->version('v1', function (Router $api) {
     $api->post('logout', 'App\Http\Controllers\AuthenticateController@logout');
     $api->get('token', 'App\Http\Controllers\AuthenticateController@getToken');
 
-    // CRUD
-    $api->resource('cars', 'App\Http\Controllers\API\CarsController') ;
+    
+    $api->group(['middleware' => 'cors'], function(Router $api) {
+         $api->resource('cars', 'App\Http\Controllers\API\CarsController') ;
+         $api->post('cars/delete', 'App\Http\Controllers\API\CarsController@destroy') ;
+    });
 
 
     //protected route group
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
-        
         // get the authenticated user
         $api->get('authenticated_user', 'App\Http\Controllers\AuthenticateController@authenticatedUser');
         
