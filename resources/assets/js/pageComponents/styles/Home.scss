@@ -37,4 +37,15 @@
 		background: #F2DD59;
 		color: #2a21af !important;
 	}
+
+
+}
+
+@media screen and (max-width: 600px) {
+	.TextContainer {
+		h2 {
+			font-size: 20px;
+			margin-bottom: 0.3em;
+		}
+	}
 }

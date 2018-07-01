@@ -5,65 +5,69 @@ import styles from './styles/Table.scss'
 import { connect } from "react-redux";
 import { baseUrl } from '../config';
 import { Link } from "react-router";
-import { fetchCars, deleteCar } from "../carsComponents/carActions";
+import { fetchCars, fetchCar, deleteCar, fetchDetails } from "../carsComponents/carActions";
+import { setModal } from '../sharedComponents/modalActions';
+
+const noImage = 'no-image-available.png';
 
 class Cars extends React.Component{
   constructor(){
     super();
+    this.handleBtnCreate = this.handleBtnCreate.bind(this);
     this.handleBtnDelete = this.handleBtnDelete.bind(this);
     this.handleBtnUpdate = this.handleBtnUpdate.bind(this);
    }
 
   componentWillMount(){
     this.props.dispatch(fetchCars());
+    this.props.dispatch(fetchDetails());
   }
 
-  handleBtnUpdate(id, event){
-    event.preventDefault();
-    let r = confirm("Are you sure you want to delete this document!");
-    if (r == true) {
-      const url = baseUrl+"/api/v1/cars/delete";
-      let formElement = document.getElementById("form_"+id);
-      let formData = new FormData(formElement);
-      this.props.dispatch(deletecar(formData));
-    }
+  handleBtnCreate(e){
+    e.preventDefault();
+    this.props.setModal('CREATE');
   }
 
-  handleBtnDelete(id, event){
-    event.preventDefault();
+  handleBtnUpdate(id, e){
+    e.preventDefault();
+     this.props.dispatch(fetchCar(id));
+  }
+
+  handleBtnDelete(id, e){
+    e.preventDefault();
     if (confirm("Are you sure you want to delete this car!")) {
-      let formElement = document.getElementById("form_"+id);
-      let formData = new FormData(formElement);
-      this.props.dispatch(deleteCar(formData));
+      this.props.dispatch(deleteCar(id));
     }
   }
 
   render(){
     return(
         <div>
-        <table>
-          <caption>Cars</caption>
+         <button onClick={(e) => this.handleBtnCreate(e)}>Create New</button>
+        <table className={this.props.cars.length ? "" : "hide"}>
           <thead>
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Image</th>
               <th scope="col">Vehicle</th>
               <th scope="col">Model</th>
-              <th></th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             { this.props.cars.map((car, index) => {
               return (
                 <tr key={index+1}>
-                  <td data-label={car.name}>{car.name}</td>
-                  <td data-label="Image">Image</td>
-                  <td data-label={car.vehicle}>{car.vehicle}</td>
-                  <td data-label={car.model}>{car.model}</td>
+                  <td data-label="Name"> <div>{car.name}</div></td>
+                  <td data-label="Image">
+                     <img src={`${baseUrl}images/${car.image ? car.image: noImage}`} width="60px" height="60px" />
+                  </td>
+                  <td data-label="Vehicle"><div>{car.vehicle}</div></td>
+                  <td data-label="Model"><div>{car.model}</div></td>
                   <td>
                     {<form id={"form_"+car.id} className="pull-left" method="post">
-                      <button onClick={(event) => this.handleBtnUpdate(car.id, event)}>Update</button>
-                      <button onClick={(event) => this.handleBtnDelete(car.id, event)}>Delete</button>
+                      <button onClick={(e) => this.handleBtnUpdate(car.id, e)}>Update</button>
+                      <button onClick={(e) => this.handleBtnDelete(car.id, e)}>Delete</button>
                       <input type="hidden" name="car_id" value={car.id} />
                     </form>}
                   </td>

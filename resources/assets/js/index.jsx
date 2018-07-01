@@ -8,7 +8,7 @@ import { loginSuccess,
 import jwtDecode from 'jwt-decode';
 import Routes from './routes';
 
-// import axios from 'axios';
+
 import { store } from './bootstrap'
 
 const root = document.querySelector('#index');

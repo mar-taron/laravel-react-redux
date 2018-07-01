@@ -9,6 +9,13 @@ import styles from './Navigation.scss';
 
 class Navigation extends Component {
 
+    constructor(){
+    	super();
+        this.state = {
+        	opened: "hide-menu",
+        }
+    }
+
 	logout(e) {
 		e.preventDefault();
 		this.props.setModal('SIGN_OUT');
@@ -24,20 +31,32 @@ class Navigation extends Component {
 		this.props.setModal('SIGN_UP');
 	}
 
+	toogleMenu(){
+        this.setState({
+        	opened: this.state.opened ? "" : "hide-menu"
+        });
+	}
+
 	render() {
 		const { isAuthenticated } = this.props.auth;
 		const userLinks = (
-			<nav styleName="navLinks">
-				<li><NavLink to="/" activeClassName="active">Home</NavLink></li>
-				<li><NavLink to="/Cars" activeClassName="active">Cars</NavLink></li>
-				<li><a href="#" onClick={this.logout.bind(this)}>Log Out</a></li>
+			<nav styleName="navLinks" className="main-menu">
+			    <a className="hamburger-menu" onClick={this.toogleMenu.bind(this)}>Menu</a>
+			    <ul className={'ul-main-menu ' + this.state.opened} >
+			       <li><NavLink to="/" activeClassName="active">Home</NavLink></li>
+				   <li><NavLink to="/Cars" activeClassName="active">Cars</NavLink></li>
+				   <li><a href="#" onClick={this.logout.bind(this)}>Log Out</a></li>
+			    </ul>				
 			</nav>
 		);
 		const guestLinks = (
-			<nav styleName="navLinks">
-				<li><NavLink to="/" activeClassName="active">Home</NavLink></li>
-				<li><a href="#" onClick={this.openLogin.bind(this)}>Log In</a></li>
-				<li><a href="#" onClick={this.openSignUp.bind(this)}>Sign Up</a></li>
+			<nav styleName="navLinks" className="main-menu">
+			    <a className="hamburger-menu" onClick={this.toogleMenu.bind(this)}>Menu</a>
+			    <ul className={'ul-main-menu ' + this.state.opened} >
+			      <li><NavLink to="/" activeClassName="active">Home</NavLink></li>
+				  <li><a href="#" onClick={this.openLogin.bind(this)}>Log In</a></li>
+			      <li><a href="#" onClick={this.openSignUp.bind(this)}>Sign Up</a></li>
+			    </ul>				
 			</nav>
 		);
 		return (isAuthenticated) ? userLinks : guestLinks;

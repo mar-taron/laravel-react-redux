@@ -11,7 +11,7 @@ class ModelTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('models')->insert([
+      DB::table('car_models')->insert([
         [
             'name' => 'E350',
             'vehicle_id' => '1',                

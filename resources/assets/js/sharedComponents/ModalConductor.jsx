@@ -6,6 +6,8 @@ import * as actions from './modalActions.js';
 import SignInModal from '../authComponents/SignInModal';
 import SignOutModal from '../authComponents/SignOutModal';
 import SignUpModal from '../authComponents/SignUpModal';
+import CreateModal from '../carsComponents/CreateModal';
+import UpdateModal from '../carsComponents/UpdateModal';
 
 
 const ModalConductor = props => {
@@ -16,6 +18,11 @@ const ModalConductor = props => {
 		return <SignOutModal {...props}/>;
 	case 'SIGN_UP':
 		return <SignUpModal {...props}/>;
+	case 'CREATE':
+		return <CreateModal {...props}/>;
+
+	case 'UPDATE':
+		return <UpdateModal {...props}/>;
 
 	default:
       return null;

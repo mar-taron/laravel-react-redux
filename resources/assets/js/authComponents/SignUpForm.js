@@ -5,9 +5,9 @@ import { setModal } from '../sharedComponents/modalActions';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 
-import TextFieldGroup from './common/TextFieldGroup';
+import TextFieldGroup from '../sharedComponents/TextFieldGroup';
 
-import styles from './styles/formStyles.scss';
+import styles from '../sharedComponents/styles/formStyles.scss';
 
 class SignUpForm extends Component {
 	constructor() {

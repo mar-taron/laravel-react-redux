@@ -9,7 +9,7 @@ import CSSModules from 'react-css-modules';
 
 import ModalWrapper from '../sharedComponents/ModalWrapper';
 
-import styles from './styles/formStyles';
+import styles from '../sharedComponents/styles/formStyles';
 
 const SignOutModal = (props, context) => {
 	

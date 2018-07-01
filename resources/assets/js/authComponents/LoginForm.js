@@ -4,10 +4,11 @@ import { login } from './authActions';
 import { setModal } from '../sharedComponents/modalActions';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
+import { NotificationManager } from 'react-notifications';
 
-import TextFieldGroup from './common/TextFieldGroup';
+import TextFieldGroup from '../sharedComponents/TextFieldGroup';
 
-import styles from './styles/formStyles.scss';
+import styles from '../sharedComponents/styles/formStyles.scss';
 
 class LoginForm extends Component {
 	constructor() {
@@ -35,10 +36,13 @@ class LoginForm extends Component {
 				this.props.setModal('');
 				this.context.router.history.push('/Cars')
 			},
-			(err) => this.setState({
+			(err) => {
+				this.setState({
 				//  errors: err.response.data.errors,
 				 isLoading: false
-			 })
+			    })
+			    NotificationManager.error("Invalid Credentials", 'Error', 5000);
+			}
 		);
 	}
 

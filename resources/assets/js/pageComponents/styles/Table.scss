@@ -10,6 +10,7 @@ table {
   table-layout: fixed;
   font-size: 14px;
   color: #000;
+  margin-top: 20px;
 }
 
 table caption {
@@ -28,10 +29,12 @@ table th,
 table td {
   padding: .625em;
   text-align: center;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 table th {
-  font-size: .85em;
+  font-size: 18px;
   letter-spacing: .1em;
   text-transform: uppercase;
   font-weight: bold;
@@ -66,7 +69,7 @@ table th {
   table td {
     border-bottom: 1px solid #ddd;
     display: block;
-    font-size: .8em;
+    font-size: 14px;
     text-align: right;
   }
   

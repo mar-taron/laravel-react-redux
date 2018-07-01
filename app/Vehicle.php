@@ -14,6 +14,6 @@ class Vehicle extends Model
 
   public function models()
   {
-      return $this->hasMany('App\Model');
+      return $this->hasMany('App\CarModel');
   }
 }

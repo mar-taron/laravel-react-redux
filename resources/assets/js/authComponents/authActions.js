@@ -44,8 +44,6 @@ export function login(data) {
 		)
 		.catch(err => {
 			throw(err);
-			// let w = window.open();
-			// w.document.html(err.response.data);
 		});
 	}
 }

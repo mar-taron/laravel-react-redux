@@ -19,7 +19,8 @@ export function fetchCar(id){
   return function (dispatch) {
     axios.get(baseUrl+"api/cars/"+id)
     .then((response) => {
-      dispatch({type: "FETCH_CAR_FULFILLED", payload: response.data.car});
+      dispatch({type: "FETCH_CAR_FULFILLED", payload: response.data.data});
+      dispatch({type: "SET_MODAL", modal: "UPDATE"});
     })
     .catch((error) => {
       dispatch({type: "FETCH_CAR_REJECTED", payload: error});
@@ -27,15 +28,53 @@ export function fetchCar(id){
   }
 }
 
-export function deleteCar(formData){
+export function deleteCar(id){
   return function (dispatch) {
-    axios.post(baseUrl+"api/cars/delete", formData)
+    axios({method: 'delete', url: baseUrl+"api/cars/delete", data: {id: id}})
     .then((response) => {
       NotificationManager.success(response.data.message, 'Success', 5000);
-      dispatch(fetchcars());
+      dispatch(fetchCars());
     })
     .catch((error) => {
       NotificationManager.error("An error occured in the operation", 'Error', 5000);
+    })
+  }
+}
+
+export function createCar(formData){
+  return function (dispatch) {
+    axios.post(baseUrl+"api/cars", formData)
+    .then((response) => {
+      NotificationManager.success('Car has been created!', 'Success', 5000);
+      dispatch(fetchCars());
+    })
+    .catch((error) => {
+      NotificationManager.error("An error occured in the operation", 'Error', 5000);
+    })
+  }
+}
+
+export function updateCar(id, formData){
+  return function (dispatch) {
+    axios.post(baseUrl+"api/update_car/" + id, formData)
+    .then((response) => {
+      NotificationManager.success('Car has been update!', 'Success', 5000);
+      dispatch(fetchCars());
+    })
+    .catch((error) => {
+      NotificationManager.error("An error occured in the operation", 'Error', 5000);
+    })
+  }
+}
+
+export function fetchDetails(){
+  return function (dispatch) {
+    axios.get(baseUrl+"api/details")
+    .then((response) => {
+     dispatch({type: "FETCH_DETAILS_FULFILLED", vehicles: response.data.data.vehicles, models: response.data.data.models });
+    })
+    .catch((error) => {
+     dispatch({type: "FETCH_DETAILS_REJECTED", payload: error});
     })
   }
 }

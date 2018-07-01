@@ -39,7 +39,8 @@ $api->version('v1', function (Router $api) {
     
     $api->group(['middleware' => 'cors'], function(Router $api) {
          $api->resource('cars', 'App\Http\Controllers\API\CarsController') ;
-         $api->post('cars/delete', 'App\Http\Controllers\API\CarsController@destroy') ;
+         $api->get('details', 'App\Http\Controllers\API\CarsController@details') ;
+         $api->post('update_car/{id}','App\Http\Controllers\API\CarsController@update_car');
     });
 
 
