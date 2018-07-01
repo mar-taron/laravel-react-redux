@@ -35,13 +35,15 @@ class CarsController extends BaseController
             return $this->sendError('error validation', $validator->errors());
         }
 
-        $image = $request->file('image');
+        if ($input['image']) {        
+            $image = $request->file('image');
 
-        $input['image'] = time().'.'.$image->getClientOriginalExtension();
+            $input['image'] = time().'.'.$image->getClientOriginalExtension();
 
-        $destinationPath = public_path('/images');
-
-        $image->move($destinationPath, $input['image']);
+            $destinationPath = public_path('/images');
+            
+            $image->move($destinationPath, $input['image']);
+        }
      
         $car = Car::create($input);
         return $this->sendResponse($car->toArray(), 'Car created succesfully');
