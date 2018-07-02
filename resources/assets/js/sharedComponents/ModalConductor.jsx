@@ -14,18 +14,17 @@ const ModalConductor = props => {
   switch (props.currentModal) {
     case 'SIGN_IN':
     	return <SignInModal {...props}/>;
-	case 'SIGN_OUT':
-		return <SignOutModal {...props}/>;
-	case 'SIGN_UP':
-		return <SignUpModal {...props}/>;
-	case 'CREATE':
-		return <CreateModal {...props}/>;
+  	case 'SIGN_OUT':
+  		return <SignOutModal {...props}/>;
+  	case 'SIGN_UP':
+  		return <SignUpModal {...props}/>;
+  	case 'CREATE':
+  		return <CreateModal {...props}/>;
+  	case 'UPDATE':
+  		return <UpdateModal {...props}/>;
 
-	case 'UPDATE':
-		return <UpdateModal {...props}/>;
-
-	default:
-      return null;
+  	default:
+        return null;
   }
 };
 

@@ -9,12 +9,12 @@ import styles from './Navigation.scss';
 
 class Navigation extends Component {
 
-    constructor(){
-    	super();
-        this.state = {
-        	opened: "hide-menu",
-        }
-    }
+  constructor(){
+  	super();
+      this.state = {
+      	opened: "hide-menu",
+      }
+  }
 
 	logout(e) {
 		e.preventDefault();

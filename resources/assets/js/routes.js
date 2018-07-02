@@ -8,8 +8,6 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import Layout from './layoutComponents/Layout';
 import Home from './pageComponents/Home';
 import Cars from './pageComponents/Cars';
-// import NewCar from "./pageComponents/NewCar";
-// import EditCar from "./pageComponents/EditCar";
 
 
 //auth pages

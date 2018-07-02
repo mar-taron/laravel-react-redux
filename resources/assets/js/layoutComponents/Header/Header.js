@@ -10,15 +10,15 @@ import Navigation from './Navigation/Navigation'
 
 class Header extends Component {
     render() {
-		return (
-			<header styleName="header">
-				<section styleName="HeaderBar">				    	
-					<Navigation />
-				</section>
-				<NotificationContainer/>
+			return (
+				<header styleName="header">
+					<section styleName="HeaderBar">				    	
+						<Navigation />
+					</section>
+					<NotificationContainer/>
 
-			</header>
-		)
+				</header>
+			)
     }
 }
 
